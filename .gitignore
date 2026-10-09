@@ -21,3 +21,15 @@ override.tf
 override.tf.json
 *_override.tf
 *_override.tf.json
+
+# Temporary project reorganization files
+main.tf.backup
+split_terraform.py
+
+# Local environment and secret files
+.env
+.env.*
+!.env.example
+
+# Other Terraform backup files
+*.backup
