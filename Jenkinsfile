@@ -5,6 +5,12 @@ pipeline {
         timestamps()
     }
 
+    environment {
+        DOCKER_HOST = 'tcp://docker:2376'
+        DOCKER_TLS_VERIFY = '1'
+        DOCKER_CERT_PATH = '/var/jenkins_home/.docker-certs'
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -28,6 +34,12 @@ pipeline {
         stage('Python Syntax Check') {
             steps {
                 sh 'python3 -m py_compile app/app.py'
+            }
+        }
+
+        stage('Docker Build') {
+            steps {
+                sh 'docker build -t devops-3tier-app:${BUILD_NUMBER} ./app'
             }
         }
     }
